@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order {{ verb }}</title>
+</head>
+<body>
+    <h1>Order update:</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <select name="user" id="">
+            {% for user in all_users %}
+                <option value="{{ user.pk }}"> {{ user.username }} </option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="number" name="summ" id="" value="{{ obj.summ }}">
+        <br>
+        <select name="order_currency" id="">
+            {% for currency in all_currency %}
+                <option value="{{ currency.pk }}"
+                        {% if obj.order_currency.pk == currency %}
+                        selected
+                        {% endif %}
+                > {{ currency.name }} </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

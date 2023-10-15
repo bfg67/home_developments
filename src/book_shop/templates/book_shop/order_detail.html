@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order {{ verb }}</title>
+</head>
+<body>
+    <h1>Order detail:</h1>
+    <b>ID:</b> {{ obj.pk }}<br>
+    <b>user:</b> {{ obj.user }}<br>
+    <b>summ:</b> {{ obj.summ }}<br>
+    <b>order_currency:</b> {{ obj.order_currency.name }}<br>
+</body>
+</html>

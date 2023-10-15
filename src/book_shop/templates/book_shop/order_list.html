@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders {{ verb }}t</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <td>ID</td>
+        <td>User</td>
+        <td>Summ</td>
+        <td>Currency</td>
+        <td>Actions</td>
+    </tr>
+    {% for obj in obj_list %}
+    <tr>
+        <td><a href="/book_shop/order/{{ obj.pk }}">{{ obj.pk }}</a></td>
+        <td>{{ obj.user }}</td>
+        <td>{{ obj.summ }}</td>
+        <td>{{ obj.order_currency }}</td>
+        <td><a href="/book_shop/currency/update/{{ obj.pk }}">Update</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
