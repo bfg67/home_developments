@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-
 from . import models, forms
 
 
@@ -36,7 +35,7 @@ def currency_create(request):
     elif request.method == "POST":
         form = forms.CurrencyForm(request.POST)
         if form.is_valid():
-            obj = form.save_obj()
+            obj = form.save()
             return HttpResponseRedirect(f"/book_shop/currency/{obj.pk}")
         else:
             context = {"verb": "create", "form": form}
@@ -59,20 +58,18 @@ def currency_update(request, pk):
             "description": obj.description,
         })
         context = {"obj": obj, "verb": "update", "form": form}
-
     elif request.method == "POST":
         form = forms.CurrencyForm(request.POST)
         if form.is_valid():
-            obj_pk = form.update_obj()
-        return HttpResponseRedirect(f"/book_shop/currency/{obj_pk.pk}")
-
+            form.update_obj(pk)
+            return HttpResponseRedirect(f"/book_shop/currency/{pk}")
     else:
         raise Exception("WRONG METHOD")
     return render(
-            request,
-            template_name=template_name,
-            context=context
-        )
+        request,
+        template_name=template_name,
+        context=context,
+    )
 
 
 def order_detail(request, pk):
@@ -96,15 +93,15 @@ def order_list(request):
 
 
 def order_create(request):
+    template_name = "book_shop/order_create.html"
     if request.method == "GET":
-        template_name = "book_shop/order_create.html"
-        context = {"verb": "create"}
+        form = forms.OrderForm()
+        context = {"verb": "create", "form": form}
     elif request.method == "POST":
-        name = request.POST.get("name")
-        description = request.POST.get("description")
-        print(name, description)
-        obj = models.Currency.objects.create(name=name, description=description)
-        return HttpResponseRedirect(f"/book_shop/currency/{obj.pk}")
+        form = forms.OrderForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+        return HttpResponseRedirect(f"/book_shop/order/{obj.pk}")
     else:
         raise Exception("WRONG METHOD")
     return render(
