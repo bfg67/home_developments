@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Orders {{ verb }}{% endblock title %}
+{% block body %}
+    <h1>Order to delete:</h1>
+    <b>ID:</b> {{ object.pk }}<br>
+    <b>user:</b> {{ object.user }}<br>
+    <b>summ:</b> {{ object.summ }}<br>
+    <b>order_currency:</b> {{ object.order_currency.name }}<br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit"class="btn btn-danger">Are you sure?</button>
+    </form>
+{% endblock %}
