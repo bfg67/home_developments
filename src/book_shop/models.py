@@ -18,6 +18,9 @@ class Currency(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    def get_absolute_url(self):
+        return f"/book_shop/currency/{self.pk}/"
+
 
 class Order(models.Model):
     user = models.ForeignKey(
@@ -38,4 +41,8 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order for User {self.user.username} - {self.summ} {self.order_currency.name}"
+
+    def get_absolute_url(self):
+        return f"/book_shop/order/{self.pk}/"
+
 

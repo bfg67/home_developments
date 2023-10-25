@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency {{ verb }}t</title>
-</head>
-<body>
-<table border="1">
+{% extends "base.html" %}
+{% block title %}Currency {{ verb }}{% endblock title %}
+{% block body %}
+<a href="/book_shop/currency/create/" class="btn btn-primary">Create</a>
+<table class="table table-striped">
     <tr>
         <td>ID</td>
         <td>Name</td>
         <td>Description</td>
         <td>Actions</td>
     </tr>
-    {% for obj in obj_list %}
+    {% for obj in object_list %}
     <tr>
         <td><a href="/book_shop/currency/{{ obj.pk }}">{{ obj.pk }}</a></td>
         <td>{{ obj.name }}</td>
         <td>{{ obj.description }}</td>
-        <td><a href="/book_shop/currency/update/{{ obj.pk }}">Update</a></td>
+        <td>
+            <a href="/book_shop/currency/update/{{ obj.pk }}"class="btn btn-success">Update</a>
+            <a href="/book_shop/currency/delete/{{ obj.pk }}"class="btn btn-danger">Delete</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
-</body>
-</html>
+{% endblock body %}
